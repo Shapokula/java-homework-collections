@@ -1,4 +1,6 @@
 public class NotRegisteredException extends RuntimeException {
 
-    public NotRegisteredException (String s) { super(s); }
+    public NotRegisteredException(String s) {
+        super(s);
+    }
 }

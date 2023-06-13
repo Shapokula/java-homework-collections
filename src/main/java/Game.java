@@ -9,6 +9,7 @@ public class Game {
     public HashMap<String, Player> getPlayers() {
         return players;
     }
+
     public void register(Player player) {
 
         if (players.containsKey(player.getName())) {
@@ -19,7 +20,7 @@ public class Game {
         players.put(player.getName(), player);
     }
 
-    public int round (String playerName1, String playerName2) {
+    public int round(String playerName1, String playerName2) {
 
         Player player1 = findByName(playerName1);
         Player player2 = findByName(playerName2);
