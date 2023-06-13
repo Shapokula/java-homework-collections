@@ -1,30 +1,22 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.function.Consumer;
 
 public class Game {
 
-    ArrayList<Player> players = new ArrayList<>();
+    private HashMap<String, Player> players = new HashMap<>();
 
-    public ArrayList<Player> getPlayers() {
+    public HashMap<String, Player> getPlayers() {
         return players;
     }
     public void register(Player player) {
 
-        for (int i = 0; i < players.size(); i++) {
-            Player currentPlayer = players.get(i);
-            if (currentPlayer.getId() == player.getId()) {
-                throw new AlreadyExistsException(
-                        "Игрок с id " + player.getId() + " уже существует."
-                );
-            }
-            if (currentPlayer.getName() == player.getName()) {
-                throw new AlreadyExistsException(
-                        "Игрок с именем " + player.getName() + " уже существует."
-                );
-            }
+        if (players.containsKey(player.getName())) {
+            throw new AlreadyExistsException(
+                    "Игрок с именем " + player.name + "уже существует."
+            );
         }
-
-        players.add(player);
+        players.put(player.getName(), player);
     }
 
     public int round (String playerName1, String playerName2) {
@@ -44,14 +36,13 @@ public class Game {
     }
 
     public Player findByName(String name) {
-        for (Player player :
-             players) {
-            if (player.getName() == name) {
-                return player;
-            }
+
+        Player player = players.get(name);
+        if (player == null) {
+            throw new NotRegisteredException(
+                    "Игрок с именем " + name + " не зарегистрирован."
+            );
         }
-        throw new NotRegisteredException(
-                "Игрок с именем " + name + " не зарегистрирован."
-        );
+        return player;
     }
 }

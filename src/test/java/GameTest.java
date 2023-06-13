@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,25 +25,15 @@ class GameTest {
     @Test
     public void register() {
 
-        ArrayList<Player> list = new ArrayList<>();
-        list.add(player1);
-        list.add(player2);
-        list.add(player3);
+        HashMap<String, Player> list = new HashMap<>();
+        list.put(player1.getName(), player1);
+        list.put(player2.getName(), player2);
+        list.put(player3.getName(), player3);
 
         boolean expected = true;
         boolean actual = list.equals(game.getPlayers());
 
         Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldNotAddPlayerWithExistingId() {
-
-        Player player4 = new Player(2, "Nikita", 3);
-
-        Assertions.assertThrows(AlreadyExistsException.class, () -> {
-            game.register(player4);
-        });
     }
 
     @Test
