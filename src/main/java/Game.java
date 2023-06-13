@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 public class Game {
 
-    HashMap<String, Player> players = new HashMap<>();
+    private HashMap<String, Player> players = new HashMap<>();
 
     public HashMap<String, Player> getPlayers() {
         return players;
@@ -36,14 +36,13 @@ public class Game {
     }
 
     public Player findByName(String name) {
-        for (String key :
-             players.keySet()) {
-            if (key == name) {
-                return players.get(key);
-            }
+
+        Player player = players.get(name);
+        if (player == null) {
+            throw new NotRegisteredException(
+                    "Игрок с именем " + name + " не зарегистрирован."
+            );
         }
-        throw new NotRegisteredException(
-                "Игрок с именем " + name + " не зарегистрирован."
-        );
+        return player;
     }
 }
