@@ -3,7 +3,7 @@ import java.util.function.Consumer;
 
 public class Game {
 
-    ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
 
     public ArrayList<Player> getPlayers() {
         return players;
@@ -12,12 +12,14 @@ public class Game {
 
         for (int i = 0; i < players.size(); i++) {
             Player currentPlayer = players.get(i);
+            String currentPlayerName = currentPlayer.getName();
+            String playerName = player.getName();
             if (currentPlayer.getId() == player.getId()) {
                 throw new AlreadyExistsException(
                         "Игрок с id " + player.getId() + " уже существует."
                 );
             }
-            if (currentPlayer.getName() == player.getName()) {
+            if (currentPlayerName.equals(playerName)) {
                 throw new AlreadyExistsException(
                         "Игрок с именем " + player.getName() + " уже существует."
                 );
@@ -46,7 +48,8 @@ public class Game {
     public Player findByName(String name) {
         for (Player player :
              players) {
-            if (player.getName() == name) {
+            String playerName = player.getName();
+            if (playerName.equals(name)) {
                 return player;
             }
         }
