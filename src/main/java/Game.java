@@ -8,6 +8,7 @@ public class Game {
     public ArrayList<Player> getPlayers() {
         return players;
     }
+
     public void register(Player player) {
 
         for (int i = 0; i < players.size(); i++) {
@@ -29,7 +30,7 @@ public class Game {
         players.add(player);
     }
 
-    public int round (String playerName1, String playerName2) {
+    public int round(String playerName1, String playerName2) {
 
         Player player1 = findByName(playerName1);
         Player player2 = findByName(playerName2);
@@ -47,7 +48,7 @@ public class Game {
 
     public Player findByName(String name) {
         for (Player player :
-             players) {
+                players) {
             String playerName = player.getName();
             if (playerName.equals(name)) {
                 return player;
